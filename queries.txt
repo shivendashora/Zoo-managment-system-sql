@@ -1,0 +1,174 @@
+create table login3(username varchar(100),password int, primary key(username));
+insert into login3 values("azure32", 872654);
+insert into login3 values("beta87",  123456);
+insert into login3 values("gamma42", 9876543);
+insert into login3 values("delta55",  246813);
+insert into login3 values("epsilon63", 789012);
+create table addanimal(animalid int , AnimalName varchar(20),Scientificname varchar(20), Diet varchar(20), Avglifespan int,Size int, Weight float,About varchar(20),Behavior varchar(20),Facts varchar(20),Imageurl varchar(20),Sourceofinfoentered varchar(20));
+ALTER TABLE addanimal
+ADD CONSTRAINT fko PRIMARY KEY (animalid);
+INSERT INTO addanimal VALUES (001, "Lion", "Panthera leo", "Carnivore", 10, 6.5, 265.5, "Lionsarelarge.", "Lionsprediators.", "femalehunts", "Lion Image", "National Geographic");
+INSERT INTO addanimal VALUES (003, "Elephant", "Loxodonta africana", "Herbivore", 60, 11.2, 8900.1, "Elephantsarethelarg", "Elephantsarehighlyso", "Elephantshavealong", "ElephantImage", "Smithsonian'sZoo");
+INSERT INTO addanimal VALUES (004, "Giraffe", "Giraffacame", "Herbivore", 25, 16.8, 3000.5, "Giraffeshavelongnec", "Giraffesareknownfor", "Giraffeshaveaunique", "GiraffeImage", "SanDiegoZoo");
+INSERT INTO addanimal VALUES (005, "Cheetah", "Acinonyx jubatus", "Carnivore", 12, 2.9, 125.7, "Cheetahfast", "Cheetahsesolitary", "Cheetahsreachspe", "Cheetah Image", "AfricanWildli");
+INSERT INTO addanimal VALUES (011, 'Crocodile', 'Crocodylidae', 'Carnivore', 60, 19.4, 2200.8, 'Crocodileslarge', 'Crocodilespower', 'Crocodileshavear', 'CrocodileImage', 'NationalGeographic');
+create table doctor(doct_id int,doct_name varchar(20),animalid int,phone_no int,foreign key(animalid) references addanimal(animalid),primary key(doct_id));
+INSERT INTO doctor VALUES (1, 'Dr.Smith', 001, 1234567890);
+INSERT INTO doctor VALUES (2, 'Dr.Johnson', 003,987654321);
+INSERT INTO doctor VALUES (3, 'Dr.Johnson', 005,987789012);
+INSERT INTO doctor VALUES (5, 'Dr.Williams', 004, 55555555);
+INSERT INTO doctor VALUES (6, 'Dr.Singh', 011, 55555578);
+create table ticket(cust_id int,cust_name varchar(20),email varchar(20),phone_no int,username varchar(20),primary key(cust_id));
+ALTER TABLE ticket
+ADD CONSTRAINT fk1 foreign KEY (username) references login3(username);
+create table Reviews1(cust_id int ,reviews varchar(100),phone_no int,primary key(cust_id),foreign key(cust_id) references ticket(cust_id));
+create table caretaker(caretaker_name varchar(20),phone_no int,animalid int ,primary key(animalid));
+ALTER TABLE caretaker
+ADD CONSTRAINT fk2 FOREIGN KEY (animalid) references ADDANIMAL(ANIMALID) ;
+
+CREATE TABLE STATUS(animalid int,status varchar(66),doct_id int,Avalability varchar(65));
+
+SELECT d.doct_id, a.animalid, d.doct_name, a.animalname
+FROM addanimal a
+INNER JOIN doctor d ON a.animalid = d.animalid
+WHERE d.doct_name = 'Dr.Smith';
+
+
+SELECT username, cust_id, cust_name, email
+FROM ticket
+WHERE username IN (SELECT username FROM login3);
+
+
+create table status1(animalid int,doct_id int,caretaker_name varchar(20),status1 varchar(10),avalability varchar(30),presence varchar(20));
+insert into status1 values(001,1,"shubham",'DEAD',"AVAILABLE","PRESENT");
+insert into status1 values(003,2,"Ramesh",'DEAD',"AVAILABLE","PRESENT");
+insert into status1 values(004,3,"shubham",'DEAD',"AVAILABLE","PRESENT");
+insert into status1 values(005,4,"kesri",'DEAD',"AVAILABLE","PRESENT");
+insert into status1 values(0011,5,"aayusdh",'Alive',"AVAILABLE","PRESENT");
+
+
+select animalid from doctor  where animalid IN (select animalid from addanimal);
+drop table status1;
+
+SELECT a.AnimalName, a.Scientificname, c.caretaker_name, c.phone_no
+FROM addanimal a
+JOIN caretaker c ON a.animalid = c.animalid;
+
+select*from addanimal;
+select*from ticket;
+select* from login3;
+select*from doctor;
+select*from status1;
+select*from caretaker;
+select* from reviews1;
+
+
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('John Smith', 1234567890, 001);
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('Emily Johnson', 1876543210, 003);
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('Michael Brown', 1567891230, 004);
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('Jessica Williams', 1890123456, 005);
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('David Taylor', 1345678901, 011);
+
+SELECT a.AnimalName, a.Avglifespan, r.reviews
+FROM addanimal a
+JOIN Reviews1 r ON a.animalid = r.cust_id
+WHERE a.Avglifespan between 10 and 60;
+
+
+SELECT a.AnimalName, s.status, d.doct_name
+FROM addanimal a
+JOIN STATUS s ON a.animalid = s.animalid
+JOIN doctor d ON s.doct_id = d.doct_id
+WHERE s.Avalability = 'Available';
+
+SELECT a.AnimalName, COUNT(r.reviews) AS review_count
+FROM addanimal a
+LEFT JOIN Reviews1 r ON a.animalid = r.cust_id
+GROUP BY a.AnimalName;
+
+CREATE TABLE Reviews1 (
+    cust_id int,
+    
+    reviews varchar(100),
+    phone_no int,
+    primary key(cust_id),
+    foreign key(cust_id) references ticket(cust_id)
+);
+
+
+INSERT INTO ticket (cust_id, cust_name, email, phone_no, username) VALUES (1, 'John Doe', 'john@example.com', 1234567890, 'azure32');
+INSERT INTO ticket (cust_id, cust_name, email, phone_no, username) VALUES (2, 'Jane Smith', 'jane@example.com', 1876543210, 'azure32');
+INSERT INTO ticket (cust_id, cust_name, email, phone_no, username) VALUES (3, 'James cameron', 'john@example.com', 1234567890, 'beta87');
+INSERT INTO ticket (cust_id, cust_name, email, phone_no, username) VALUES (4, 'harry styles', 'jane@example.com', 1876543210, 'gamma42');
+
+-- Insert 5 example values for the Reviews1 table
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (1, 'Great experience at the zoo!', 1234567890);
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (2, 'Loved seeing the animals up close.', 1876543210);
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (3, 'Bad Managment.', 1877543210);
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (12, 'The zoo staff were friendly and knowledgeable.', 1567891230);
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (15, 'My kids had a fantastic time at the zoo!', 1890123456);
+INSERT INTO Reviews1 (cust_id, reviews, phone_no) VALUES (45, 'Impressed with the variety of animals.', 1345678901);
+
+DELIMITER //
+
+CREATE TRIGGER username_number_check
+BEFORE INSERT ON login3
+FOR EACH ROW
+BEGIN
+    DECLARE num_count INT;
+    
+    SET num_count = LENGTH(NEW.username) - LENGTH(REPLACE(NEW.username, '0', ''));
+
+    IF num_count = 0 OR num_count > LENGTH(NEW.username) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Username must contain at least one digit (0-9)';
+    END IF;
+    
+    IF CHAR_LENGTH(NEW.username) > 10 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Username length should not exceed 10 characters';
+    END IF;
+    
+    IF CHAR_LENGTH(NEW.password) > 10 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Password length should not exceed 10 characters';
+    END IF;
+END;
+//
+
+
+
+
+
+INSERT INTO caretaker (caretaker_name, phone_no, animalid) VALUES ('Maish Katiyar', 1347678901, 011);
+select*from status1;
+drop table caretaker;
+
+
+
+DELIMITER ;
+insert into login3 values("shiven12313123213",355454);
+insert into login3 values("90ven",3554674);
+insert into login3 values("9ve0n",3554674);
+insert into login3 values("ave0n",355670);
+insert into login3 values("avn",355670);
+
+select*from login3;
+drop table caretaker;
+desc login3;
+desc addanimal;
+desc doctor;
+desc ticket;
+desc reviews1;
+desc caretaker;
+
+
+
+
+
+
+
+
+
+
+
