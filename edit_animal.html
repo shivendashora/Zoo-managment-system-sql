@@ -1,0 +1,55 @@
+{% extends 'layout.html'%}
+{% block main_content %}
+
+<div class="container col-8 col-md-5">
+    <form action="{{ url_for('update_animal', animal_id=animal._id) }}" method="POST">
+            <div class="form-group">
+                    <label for="title">*Common Name</label>
+                    <input type="text" name="common_name" id="common_name" value="{{animal.common_name}}" class="form-control" required>
+            </div>
+                <div class="form-group">
+                    <label for="title">Scientific Name</label>
+                    <input type="text" name="scientific_name" id="scientific_name" value="{{animal.scientific_name}}" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label for="title">Diet</label>
+                        <input type="text" name="diet" id="diet" value="{{animal.diet}}" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label for="title">Average Lifespan</label>
+                        <input type="text" name="avg_lifespan" id="avg_lifespan" value="{{animal.avg_lifespan}}" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label for="title">Size</label>
+                        <input type="text" name="size" id="size" value="{{animal.size}}" class="form-control">
+                </div>
+                <div class="form-group">
+                        <label for="title">Weight</label>
+                        <input type="text" name="weight" id="weight" value="{{animal.weight}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="title">About</label>
+                    <textarea name="about" id="about" class="form-control">{{animal.about}}</textarea>
+                </div>
+                <div class="form-group">
+                        <label for="title">Behavior</label>
+                        <input type="text" name="behavior" id="behavior" value="{{animal.behavior}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                            <label for="title">Facts</label>
+                            <input type="text" name="facts" id="facts" value="{{animal.facts}}" class="form-control">
+                        </div>
+                <div class="form-group">
+                        <label for="title">*Link to Image</label>
+                        <input type="text" name="img" id="img" value="{{animal.img}}" class="form-control" required>
+                </div>
+                <br>
+                <div class="container text-center">
+                        <button type="submit" class="btn btn-outline-success mr-3">Save Changes</button>
+                        <a class="btn btn-outline-danger text-dark mr-2" href="{{ url_for('animals') }}">Discard Changes</a>
+                </div>
+                <br>  
+    </form>
+</div>
+
+{% endblock main_content%}

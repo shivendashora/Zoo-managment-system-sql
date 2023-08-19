@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <title>Overall Combined Table</title>
+    <style>
+        /* Optional: Add some styling to the delete button */
+        table, td, th {  
+                border: 1px solid #ddd;
+                text-align: left;
+                color:bisque;
+                background-color:brown;
+            }
+
+        table {
+                border-collapse: collapse;
+                    width: 75%;
+                    margin-top :50px;
+            }
+
+            th, td {
+                    padding: 9px;
+            }
+        .form-contro7
+        {
+            margin-bottom: 50px;
+            width:65%;
+            background-color: grey;
+            color:bisque;
+            padding:15px;
+        }
+        .update-btn
+        {
+            background-color: #0f6805;
+            color:bisque;
+        }
+        .delete-button
+        {
+            background-color: #0f6805;
+            color:bisque;
+        }
+        .search-btn
+        {
+            background-color: #0f6805;
+            color:bisque;
+            padding:15px;
+        }
+        .print-btn
+        {
+            background-color: #0f6805;
+            color:bisque;
+            width:20%;
+        }
+    </style>
+    <h1>Ticket-info</h1>
+    <label class="land" for="Search"></label>
+                                                
+    <input class="form-contro7 " id="Search name="Search required type="text" value="search for doctor">
+    <button id='.searchbutton'class="search-btn" >Search</button>
+    <table>
+        <thead>
+            <tr>
+                {% for column_name in column_names %}
+                    <th>{{ column_name }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for column in row %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                    <td>
+                        <button class="update-btn" doct_id="{{ row[0] }}">Update</button>
+                        <button class="delete-button" doct_id="{{ row[0] }}">Delete</button>
+                        <button class="print-btn" doct_id="{{ row[0] }}">Print</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+       const printButtons = document.querySelectorAll('.print-btn');
+    printButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('tr');
+            const rowData = Array.from(row.cells).slice(0, 4).map(cell => cell.textContent).join('\t');
+            const doct_id = button.getAttribute('doct_id');
+            
+            const filename = `row_${doct_id}.txt`;
+            const content = rowData;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+
+            document.body.appendChild(link);
+            link.click();
+
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    });
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('tr');
+            const doct_id = button.getAttribute('doct_id');
+            console.log('doct_id:', doct_id);
+            
+            const requestData = {
+                doct_id: doct_id
+            };
+
+            // Send an AJAX request to the Flask route for deletion
+            fetch('/doctors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                row.remove();  // Remove the deleted row from the table
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+    
+{% endblock main_content %}

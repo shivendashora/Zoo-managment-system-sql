@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+      <!--Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
+  
+  <!--To print Title for each page if available-->
+  <title> ZOO | Add new Animal</title>
+  
+</head>
+
+<body>
+  <!-- Page Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn btn-outline  mt-3 mr-2" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline mt-3 mr-2" href="/animals">All Animals</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link btn btn-outline  mt-3 mr-2" href="/new">Add Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="/account">My Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link btn btn-outline mt-3 mr-2" href="/doctors">Tickets</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline mt-3 mr-2" href="/tickets">Doctors</a>
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--To print Name for each page if available-->
+  
+    <h2 class="text-center pt-3 mb-3">ZOO | Add new Animal</h2>
+  
+
+  <div class="col-md-6 col-lg-3 mx-auto">
+      
+        
+      
+    </div>
+  <!-- For displaying content on individual pages -->
+<div class="container-fluid">
+  
+<div class="col-12 mx-auto">
+        <form method="POST" action="/new">
+                <input id="csrf_token" name="csrf_token" type="hidden" value="IjI4ODc5MGVjM2JmZTcyOGE4NTgyNTFmNmU5MmY5OTY3MDcyMTNiMjMi.ZKEKqg.Saih-pJ-6MgZ72Wl4CirdHB0MFw">
+                <fieldset class="form-group">
+                        <legend class="mb-5">Ad New Animal</legend>
+                        <div class="row">
+                                <div class="container col-10 col-lg-8 col-xl-6">
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="common_name">*Animal id :</label>
+                                                
+                                                <input class="form-control form-control-md" id="animalid" name="animalid" required type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="common_name">*Animal Name :</label>
+                                                
+                                                <input class="form-control form-control-md" id="common_name" name="common_name" required type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="scientific_name">Scientific name :</label>
+                                                
+                                                <input class="form-control form-control-md" id="scientific_name" name="scientific_name" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="diet">Diet :</label>
+                                                
+                                                <input class="form-control form-control-md" id="diet" name="diet" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="avg_lifespan">Avg lifespan :</label>
+                                                
+                                                <input class="form-control form-control-md" id="avg_lifespan" name="avg_lifespan" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="size">Size :</label>
+                                                
+                                                <input class="form-control form-control-md" id="size" name="size" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="weight">Weight :</label>
+                                                
+                                                <input class="form-control form-control-md" id="weight" name="weight" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="about">About :</label>
+                                                
+                                                <textarea class="form-control form-control-md" id="about" name="about">
+</textarea>
+                                                
+                                        </div>
+                                </div>
+                                <div class="container col-10 col-lg-8 col-xl-6">
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="behavior">Behavior :</label>
+                                                
+                                                <textarea class="form-control form-control-md" id="behavior" name="behavior">
+</textarea>
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="facts">Facts :</label>
+                                                
+                                                <textarea class="form-control form-control-md" id="facts" name="facts">
+</textarea>
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="img">*Image url:</label>
+                                                
+                                                <input class="form-control form-control-md" id="img" name="img" required type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="form-control-label" for="source">Source of info entered :</label>
+                                                
+                                                <input class="form-control form-control-md" id="source" name="source" type="text" value="">
+                                                
+                                        </div>
+                                        <div class="form-group">
+                                                <input class="btn btn-outline-info" id="submit" name="submit" type="submit" value="Submit">
+                                                <a class="ml-2 text-danger" href="/animals">Discard Changes!</a>
+                                        </div>
+                                </div>
+                        </div>
+
+                </fieldset>
+
+</form>
+<script>
+        // Get URL parameters using JavaScript
+                const urlParams = new URLSearchParams(window.location.search);
+                const animalid = urlParams.get('animalid');
+                const AnimalName = urlParams.get('AnimalName');
+                const Scientificname = urlParams.get('Scientificname');
+                const Diet = urlParams.get('Diet');
+                const Avglifespan = urlParams.get('Avglifespan');
+                const Size = urlParams.get('Size');
+                const Weight = urlParams.get('Weight');
+                const About = urlParams.get('About');
+                const Behavior = urlParams.get('Behavior');
+                const Facts = urlParams.get('Facts');
+                const Imageurl = urlParams.get('Imageurl');
+                const Sourceofinfoentered = urlParams.get('Sourceofinfoentered');
+
+                // Populate form fields with the extracted values
+                document.getElementById('animalid').value = animalid;
+                document.getElementById('common_name').value = AnimalName;
+                document.getElementById('scientific_name').value = Scientificname;
+                document.getElementById('diet').value = Diet;
+                document.getElementById('avg_lifespan').value = Avglifespan;
+                document.getElementById('size').value = Size;
+                document.getElementById('weight').value = Weight;
+                document.getElementById('about').value = About;
+                document.getElementById('behavior').value = Behavior;
+                document.getElementById('facts').value = Facts;
+                document.getElementById('img').value = Imageurl;
+                document.getElementById('source').value = Sourceofinfoentered;
+
+        // Populate form fields with the extracted values
+</script>
+
+  <!-- Footer -->
+  <hr>
+  <footer>
+  </footer>
+  
+   <!-- Bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script> src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

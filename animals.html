@@ -1,0 +1,221 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <title>Animals Databases</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Optional: Add some styling to the delete button */
+        h1{
+            margin-bottom: 20px;
+        }
+        .delete-button {
+            background-color: transparent;
+            color: #ff0000;
+            border: none;
+            padding: 35px;
+            cursor: pointer;
+        }
+        table, td, th {  
+                border: 1px solid #ddd;
+                text-align: left;
+                color:bisque;
+                background-color:rgba(255, 0, 0, 0.4)
+            }
+
+        table {
+                border-collapse: collapse;
+                    width: 100%;
+                    margin-top :50px;
+            }
+
+            th, td {
+                    padding: 9px;
+            }
+        .delete-btn{
+            background-color: #0f6805;
+            color:bisque;
+        }
+        .update-btn{
+            background-color: #0e7e08;
+            color:bisque;
+        }
+        .input[type="text"], input[type="email"], input[type="tel"] {
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 100px;
+            width: 600px;
+        
+    }
+    .form-contro7
+        {
+            margin-bottom: 50px;
+            margin-top: 30px;
+            width:65%;
+            background-color: grey;
+            color:bisque;
+            padding:15px;
+        }
+        .Relations
+        {
+            background-color: #0e7e08;
+            padding:10px;
+            width:10%;
+            color:bisque;
+            margin-bottom: 40x;
+        }
+        .search-btn
+        {
+            background-color: #0e7e08;
+            color:bisque;
+            padding:15px;
+
+        }
+    </style>
+    <h1>Animals Databases</h1>
+    <div>
+        <button class="Relations" onclick="relation()" >Relations</button>
+        <button class="Relations" onclick="ticket()" >Ticket-info</button>
+        <button class="Relations" onclick="status()" >Status-info</button>
+        <button class="Relations" onclick="Reviews()" >Reviews</button>
+        <button class="Relations" onclick="count()" >Count Reviews</button>
+        <button class="Relations" onclick="caretaker()" >Caretaker</button>
+
+    </div>
+    <div>
+        <label class="land" for="Search"></label>
+                                                
+        <input class="form-contro7 form-control-md" id="Search name="Search required type="text" value="search for animal">
+        <button class="search-btn"><i class="ph ph-magnifying-glass"></i></button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                {% for column_name in column_names %}
+                    <th>{{ column_name }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for column in row %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                    <td>
+                        <button class="update-btn"
+                                data-animalid="{{ row[0] }}"
+                                data-animalname="{{ row[1] }}"
+                                data-scientificname="{{ row[2] }}"
+                                data-diet="{{ row[3] }}"
+                                data-avglifespan="{{ row[4] }}"
+                                data-size="{{ row[5] }}"
+                                data-weight="{{ row[6] }}"
+                                data-about="{{ row[7] }}"
+                                data-behavior="{{ row[8] }}"
+                                data-facts="{{ row[9] }}"
+                                data-imageurl="{{ row[10] }}"
+                                data-sourceofinfoentered="{{ row[11] }}">Update</button>
+                        <button class="delete-btn" animalid="{{ row[0] }}">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+    <script>
+        function status()
+        {
+            window.location.href = `/status`;
+        }
+
+        function relation()
+        {
+            window.location.href = `/relations`;
+        }
+
+        function ticket()
+        {
+            window.location.href = `/ticket-info`;
+        }
+        function Reviews()
+        {
+            window.location.href = `/reviews`;
+        }
+        function count()
+        {
+            window.location.href = `/count`;
+        }
+        function caretaker()
+        {
+            window.location.href = `/caretaker`;
+        }
+          
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const row = button.closest('tr');
+                const animalid = button.getAttribute('animalid');
+                console.log('animalid:', animalid);
+                
+                const requestData = {
+                    animalid: animalid
+                };
+    
+                // Send an AJAX request to the Flask route for deletion
+                fetch('/animals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    row.remove();  // Remove the deleted row from the table
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        const updateButtons = document.querySelectorAll('.update-btn');
+        updateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const animalid = button.getAttribute('data-animalid');
+                const animalname = button.getAttribute('data-animalname');
+                const scientificname = button.getAttribute('data-scientificname');
+                const diet = button.getAttribute('data-diet');
+                const avglifespan = button.getAttribute('data-avglifespan');
+                const size = button.getAttribute('data-size');
+                const weight = button.getAttribute('data-weight');
+                const about = button.getAttribute('data-about');
+                const behavior = button.getAttribute('data-behavior');
+                const facts = button.getAttribute('data-facts');
+                const imageurl = button.getAttribute('data-imageurl');
+                const sourceofinfoentered = button.getAttribute('data-sourceofinfoentered');
+                
+                console.log('animalid:', animalid);
+                console.log('animalname:', animalname);
+                console.log('scientificname:', scientificname);
+                console.log('diet:', diet);
+                console.log('avglifespan:', avglifespan);
+                console.log('size:', size);
+                console.log('weight:', weight);
+                console.log('about:', about);
+                console.log('behavior:', behavior);
+                console.log('facts:', facts);
+                console.log('imageurl:', imageurl);
+                console.log('sourceofinfoentered:', sourceofinfoentered);
+
+                // Redirect to the update page with attributes as URL parameters
+                const queryParams = `?animalid=${animalid}&AnimalName=${animalname}&Scientificname=${scientificname}&Diet=${diet}&Avglifespan=${avglifespan}&Size=${size}&Weight=${weight}&About=${about}&Behavior=${behavior}&Facts=${facts}&Imageurl=${imageurl}&Sourceofinfoentered=${sourceofinfoentered}`;
+                window.location.href = `/new${queryParams}`;
+            });
+        });
+
+    </script>
+{% endblock main_content %}

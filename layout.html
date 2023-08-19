@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+      <!--Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  {% if title %}
+  <!--To print Title for each page if available-->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <title> ZOO | {{ title }}</title>
+  {% else %}
+  <title>ZOO</title>
+  {% endif %}
+</head>
+
+<body>
+  <!-- Page Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn btn-outline mt-3 mr-2" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('animals') }}">All Animals</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('new_animal') }}">Add Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('account') }}">My Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('login') }}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('doctors') }}">Doctors</a>
+      </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline  mt-3 mr-2" href="{{ url_for('tickets') }}">Tickets</a>
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--To print Name for each page if available-->
+  {% if title %}
+    <h2 class="text-center pt-3 mb-3">ZOO <i class="ph ph-paw-print"></i> | {{ title }} <i class="ph ph-house"></i></h2>
+  {% else %}
+    <h4></h4>
+  {% endif %}
+
+  <div class="col-md-6 col-lg-3 mx-auto">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} text-center">
+              {{ message}}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  <!-- For displaying content on individual pages -->
+<div class="container-fluid">
+  {% block main_content %}
+  
+  {% endblock main_content %}
+</div>
+
+  <!-- Footer -->
+  <hr>
+  <footer>
+  </footer>
+  
+   <!-- Bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

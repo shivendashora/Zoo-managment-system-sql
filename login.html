@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+      <!--Custom CSS-->
+  <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+
+  
+  <!--To print Title for each page if available-->
+  <title> ZOO | Login</title>
+  
+</head>
+
+<body>
+  <!-- Page Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn btn-outline mt-3 mr-2" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline mt-3 mr-2" href="/animals">All Animals</a>
+        </li>
+        <li class="nav-item">
+                <a class="nav-link btn btn-outline  mt-3 mr-2" href="/new">Add Animal</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="/account">My Account</a>
+        </li>
+       
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline  mt-3 mr-2" href="/doctors">Doctors</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link btn btn-outline  mt-3 mr-2" href="/tickets">Tickets</a>
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--To print Name for each page if available-->
+  
+    <h2 class="text-center pt-3 mb-3">ZOO | Login</h2>
+  
+
+  <div class="col-md-6 col-lg-3 mx-auto">
+      
+        
+      
+    </div>
+  <!-- For displaying content on individual pages -->
+<div class="container-fluid">
+  
+
+  <div class="container">
+        <div class="row">
+            <div class=" col-10 col-md-6 mx-auto">
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="col-10 col-lg-6 mx-auto">
+      
+        <form method="POST" action="/login">
+            <input id="csrf_token" name="csrf_token" type="hidden" value="ImVjMjI4MDc4ZTIxOTlhMTA5NjdjMjcwYjRiNjFiMjc3Njg4NmVlOTMi.ZNO0lQ.ylAyTcgMOIo8enCY60Rb8SLkzgM">
+            <fieldset class="form-group">
+                <legend class="mb-5">User Login</legend>
+                <div class="form-group">
+                    <label class="form-control-label" for="username">Username</label>
+                    
+                        <input class="form-control form-control-md" id="username" name="username" required type="text" value="">
+                    
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="password">Password</label>
+                    
+                        <input class="form-control form-control-md" id="password" name="password" required type="password" value="">
+                    
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <input class="btn btn-outline-info" id="submit" onclick="func()" name="submit" type="submit" value="Login">
+            </div >
+            <small class="shiven">Forgot Password<a class="ml-2" href="#">Reset Password!</a></small>
+            <br>
+            <small class="land">New Member? <a class="ml-2" href="/register">Register Here!</a></small>
+        </form>
+        <div>
+          {% if session['error'] %}
+        <div class="error-message" style="color: red;">
+            {{ session['error'] }}
+        </div>
+    {% endif %}
+
+        </div>
+    </div>
+  
+</div>
+<script>
+     
+
+</script>
+
+
+  <!-- Footer -->
+  <hr>
+  <footer>
+  </footer>
+  
+   <!-- Bootstrap js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

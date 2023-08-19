@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <title>Overall Combined Table</title>
+    <style>
+        /* Optional: Add some styling to the delete button */
+        .delete-button{
+            background-color: #0f6805;
+            color:bisque;
+        }
+        table, td, th {  
+                border: 1px solid #ddd;
+                text-align: left;
+                color:bisque;
+                background-color:brown;
+                margin-bottom: 20px;
+            }
+
+        table {
+                border-collapse: collapse;
+                    width: 100%;
+                    margin-top :50px;
+            }
+
+            th, td {
+                    margin-top: 20px;
+                    padding: 9px;
+            }
+        .form-contro7
+        {
+            margin-bottom: 50px;
+            width:75%;
+            padding:20px;
+            background-color: grey;
+            color:bisque
+        }
+        .update-btn{
+            background-color: #0f6805;
+            color:bisque;
+        }
+        .search-btn
+        {
+            padding:20px;
+            background-color: #0f6805;
+            color:bisque
+        }
+    </style>
+    <h1>Count</h1>
+    <label class="land" for="Search"></label>
+                                                
+    <input class="form-contro7 " id="Search name="Search required type="text" value="search for doctor">
+    <button class="search-btn" >Search</button>
+    <table>
+        <thead>
+            <tr>
+                {% for column_name in column_names %}
+                    <th>{{ column_name }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for column in row %}
+                        <td>{{ column }}</td>
+                    {% endfor %}
+                    <td>
+                        <button class="update-btn" doct_id="{{ row[0] }}">Update</button>
+                        <button class="delete-button" doct_id="{{ row[0] }}">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('tr');
+            const doct_id = button.getAttribute('doct_id');
+            console.log('doct_id:', doct_id);
+            
+            const requestData = {
+                doct_id: doct_id
+            };
+
+            // Send an AJAX request to the Flask route for deletion
+            fetch('/doctors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                row.remove();  // Remove the deleted row from the table
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+    
+{% endblock main_content %}

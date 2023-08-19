@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block main_content %}
+
+<hr>
+<h3 class="text-center pb-3">Database Administration</h3>
+<hr>
+<div class="container pt-3 pb-5">
+ 
+<h5 class="heading">Database Status</h5>
+<p>Animals in DB :{{row_count}} <strong> {{ animals }} </strong></p>
+<p>Username :{{username}} <strong> {{ animals }} </strong></p>
+</div>
+
+<div class="container mx-auto">
+        <div class="row">
+          <div class="db-options col-10 col-md-6 col-lg-6 mx-auto">
+            <a href="{{ url_for('new_animal') }}">
+              <figure class="db-options-container">
+                <img class="product-img img-fluid rounded" alt="" src="https://cdn.pixabay.com/photo/2014/09/17/21/56/young-animal-450149_960_720.jpg">
+                <figcaption class="text-overlay lead">Add New Animal to Database</figcaption>
+              </figure>
+            </a>
+          </div> 
+          <div class="db-options col-10 col-md-6 col-lg-6 mx-auto">
+              <a href="{{ url_for('animals') }}">
+                <figure class="db-options-container">
+                  <img class="product-img img-fluid rounded" alt="" src="https://images.unsplash.com/photo-1562805508-5b92dc24212d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80">
+                  <figcaption class="text-overlay lead">Update or Remove Existing Animal</figcaption>
+                </figure>
+              </a>
+            </div> 
+        </div>
+      </div>
+{% endblock main_content %}
